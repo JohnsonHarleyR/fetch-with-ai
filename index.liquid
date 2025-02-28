@@ -8,6 +8,8 @@ title: Fetch
     I will now fetch from an API by writing my own code, so that I can memorize how to do it with Alpine, then by using AI. Here we go.
 </p>
 
+<!-- These first couple divs I did without CoPilot help so that I could get the hang of it -->
+
 <div x-data="{dogPhoto: $fetchjson('https://dog.ceo/api/breeds/image/random', jsonItem='message')}">
     <h2>Random Dog Photo</h2>
     <p>I coded this part on my own. Refresh to see a new dog!</p>
@@ -20,9 +22,47 @@ title: Fetch
     <img alt="random placeholder" id="placeholder-image"/>
 </div>
 
-<!-- I could not get this one to work until I asked GPT copilot for help -->
+<!-- I could not get this one to work until I asked GitHub copilot (GPT) for help -->
+
+<!-- CoPilot: Why isn't this code showing an image? It fetched an object that is not json, but has a url in the result. How do I put the url inside the img src? (It then gave me revised code) -->
 <div x-data="{ placeholder: '' }" x-init="fetch(getRandomPlaceholderImageUrl()).then(response => response.url).then(url => placeholder = url)">
     <h2>Random Placeholder Photo with AI Help</h2>
     <p>So this code is similar to the one above, but I was trying to do it using Alpine. I couldn't get it to work, so I asked ChatGPT copilot for help. I was surprised to see it explain exactly why it wasn't working, and then give me a revised code. The code still did not work, but I only had to tweak one thing and now it works!</p>
+    <img alt="random placeholder" x-bind:src="placeholder"/>
+</div>
+
+<!-- This one was completely generated with with GitHub Copilot (GPT) -->
+
+<!-- CoPilot: Please create a div in Alpine that fetches json from this url (https://jsonplaceholder.typicode.com/photos/5000) and places it as the src inside an img -->
+
+<!-- CoPilot: Can you please revise this to use fetchjson inside of x-data -->
+
+<!-- this is where I realized that the photo url do not work with that end point, so I decided to use a different end point -->
+
+<!-- CoPilot: This is great! Can you please revise this to fetch this url (https://jsonplaceholder.typicode.com/posts/50) and then put the 'body' result inside a paragraph instead of an image src -->
+
+<!-- Obviously there were small amounts of editing, too, but the CoPilot did most of the work -->
+<div x-data="{ postBody: $fetchjson(`https://jsonplaceholder.typicode.com/posts/${getRandomIntInRange(1,100)}`, jsonItem='body') }">
+    <h2>Random Post from JSONPlaceholder</h2>
+    <p>This code fetches a post from JSONPlaceholder and displays its body below. It was completely generated with GitHub Copilot, but then I asked it to revise or modify it a couple of  times.</p>
+    <p x-text="postBody"></p>
+</div>
+
+<!-- This one I asked it to do something similar as above, but I used Claude instead of GPT -->
+
+<!-- CoPilot: Please create a div in Alpine that fetches json from this url (https://jsonplaceholder.typicode.com/posts/49) and places the 'body' as text inside a paragraph. -->
+<div x-data="{ postText: $fetchjson('https://jsonplaceholder.typicode.com/posts/49', jsonItem='body') }">
+<h2>Another Post from JSONPlaceholder</h2>
+<p>This fetches post #49 and displays its body text below:</p>
+<p x-text="postText"></p>
+<p>The difference between this one and the previous one was just that I switched it to Claude instead of GPT. It pretty much came out the same.</p>
+</div>
+
+<!-- This one, including the javascript it uses from utility.js, was generated using CoPilot, and Claude rather than ChatGPT. -->
+
+<!-- CoPilot: Please write something similar to this, but instead of fetching, get the placeholder data from the function called 'fetchRandomImage()' (by 'this', I previous code similar to this) -->
+<div x-data="{ placeholder: '' }" x-init="fetchRandomImage().then(url => placeholder = url)">
+    <h2>Random Placeholder Photo using fetchRandomImage</h2>
+    <p>This version uses the fetchRandomImage() function to get the placeholder image URL. All of this, including the javascript in the file, was generated using CoPilot, and Claude rather than ChatGPT.</p>
     <img alt="random placeholder" x-bind:src="placeholder"/>
 </div>
