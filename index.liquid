@@ -1,7 +1,28 @@
 ---
 layout: layout.liquid
-title: 11ty Boilerplate
+title: Fetch
 ---
 
-<h1>Yet Another 11ty <strong>Boilerplate</strong></h1>
-<img alt="pine" src="/images/pine.png" width="50" />
+<h1>Let's Play Fetch</strong></h1>
+<p>
+    I will now fetch from an API by writing my own code, so that I can memorize how to do it with Alpine, then by using AI. Here we go.
+</p>
+
+<div x-data="{dogPhoto: $fetchjson('https://dog.ceo/api/breeds/image/random', jsonItem='message')}">
+    <h2>Random Dog Photo</h2>
+    <p>I coded this part on my own. Refresh to see a new dog!</p>
+    <img alt="random dog" x-bind:src="dogPhoto"/>
+</div>
+
+<div>
+    <h2>Random Placeholder Photo</h2>
+    <p>I coded this one alone too, but with more javascript. Refresh to see a placeholder!</p>
+    <img alt="random placeholder" id="placeholder-image"/>
+</div>
+
+<!-- I could not get this one to work until I asked GPT copilot for help -->
+<div x-data="{ placeholder: '' }" x-init="fetch(getRandomPlaceholderImageUrl()).then(response => response.url).then(url => placeholder = url)">
+    <h2>Random Placeholder Photo with AI Help</h2>
+    <p>So this code is similar to the one above, but I was trying to do it using Alpine. I couldn't get it to work, so I asked ChatGPT copilot for help. I was surprised to see it explain exactly why it wasn't working, and then give me a revised code. The code still did not work, but I only had to tweak one thing and now it works!</p>
+    <img alt="random placeholder" x-bind:src="placeholder"/>
+</div>
