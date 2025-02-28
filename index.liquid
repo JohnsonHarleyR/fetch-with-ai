@@ -8,12 +8,26 @@ title: Fetch
     I will now fetch from an API by writing my own code, so that I can memorize how to do it with Alpine, then by using AI. Here we go.
 </p>
 
-<!-- These first couple divs I did without CoPilot help so that I could get the hang of it -->
+<!-- These first couple divs I did without CoPilot help so that I could get the hang of it (Ok, I did end up asking it to help me style the first one with Tailwind after the fact, because I was struggling to get Tailwind to work.) -->
 
-<div x-data="{dogPhoto: $fetchjson('https://dog.ceo/api/breeds/image/random', jsonItem='message')}">
+<!-- this was the original first div I coded -->
+{% comment %} <div x-data="{dogPhoto: $fetchjson('https://dog.ceo/api/breeds/image/random', jsonItem='message')}">
     <h2>Random Dog Photo</h2>
     <p>I coded this part on my own. Refresh to see a new dog!</p>
     <img alt="random dog" x-bind:src="dogPhoto"/>
+</div> {% endcomment %}
+
+<!-- I asked CoPilot to add some Tailwind classes to the code above, and it did. "Can you please style this div with Tailwind in a pretty way? Make it look like a princess." -->
+<div x-data="{dogPhoto: $fetchjson('https://dog.ceo/api/breeds/image/random', jsonItem='message')}" 
+     class="max-w-md mx-auto my-8 p-6 rounded-xl shadow-lg bg-pink-50 border-4 border-pink-200">
+    <h2 class="text-2xl font-serif text-pink-600 text-center mb-4 font-bold">✨ Random Dog Photo ✨</h2>
+    <p class="text-pink-500 text-center mb-4 italic">I coded this part on my own. (Minus the Tailwind.) Refresh to see a new dog!</p>
+    <div class="p-2 bg-white rounded-lg shadow-inner">
+        <img alt="random dog" 
+            id="dog-image"
+             x-bind:src="dogPhoto"
+             class="w-full h-64 object-cover rounded-lg border-2 border-pink-100 hover:scale-105 transition-transform duration-300"/>
+    </div>
 </div>
 
 <div>
@@ -22,7 +36,7 @@ title: Fetch
     <img alt="random placeholder" id="placeholder-image"/>
 </div>
 
-<!-- I could not get this one to work until I asked GitHub copilot (GPT) for help -->
+<!-- I could not get this next one to work until I asked GitHub copilot (GPT) for help -->
 
 <!-- CoPilot: Why isn't this code showing an image? It fetched an object that is not json, but has a url in the result. How do I put the url inside the img src? (It then gave me revised code) -->
 <div x-data="{ placeholder: '' }" x-init="fetch(getRandomPlaceholderImageUrl()).then(response => response.url).then(url => placeholder = url)">
@@ -62,7 +76,7 @@ title: Fetch
 
 <!-- CoPilot: Please write something similar to this, but instead of fetching, get the placeholder data from the function called 'fetchRandomImage()' (by 'this', I previous code similar to this) -->
 <div x-data="{ placeholder: '' }" x-init="fetchRandomImage().then(url => placeholder = url)">
-    <h2>Random Placeholder Photo using fetchRandomImage</h2>
+    <h2>Random Placeholder Photo using CoPilot</h2>
     <p>This version uses the fetchRandomImage() function to get the placeholder image URL. All of this, including the javascript in the file, was generated using CoPilot, and Claude rather than ChatGPT.</p>
     <img alt="random placeholder" x-bind:src="placeholder"/>
 </div>
