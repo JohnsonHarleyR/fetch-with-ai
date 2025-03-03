@@ -3,10 +3,13 @@ layout: layout.liquid
 title: Fetch
 ---
 
-<h1>Let's Play Fetch</strong></h1>
-<p>
-    I will now fetch from an API by writing my own code, so that I can memorize how to do it with Alpine, then by using AI. Here we go.
-</p>
+<!-- Please style this with Tailwind in a visually pleasing way with a larger h1 title -->
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-5xl font-bold text-center bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-transparent bg-clip-text mb-6">Let's Play Fetch</h1>
+    <p class="text-lg text-center text-white-700 max-w-2xl mx-auto leading-relaxed">
+        I will now fetch from an API by writing my own code, so that I can memorize how to do it with Alpine, then by using AI. Here we go.
+    </p>
+</div>
 
 <!-- These first couple divs I did without CoPilot help so that I could get the hang of it (Ok, I did end up asking it to help me style the first one with Tailwind after the fact, because I was struggling to get Tailwind to work.) -->
 
@@ -85,20 +88,45 @@ title: Fetch
 <!-- CoPilot: This is great! Can you please revise this to fetch this url (https://jsonplaceholder.typicode.com/posts/50) and then put the 'body' result inside a paragraph instead of an image src -->
 
 <!-- Obviously there were small amounts of editing, too, but the CoPilot did most of the work -->
-<div x-data="{ postBody: $fetchjson(`https://jsonplaceholder.typicode.com/posts/${getRandomIntInRange(1,100)}`, jsonItem='body') }">
+{% comment %} <div x-data="{ postBody: $fetchjson(`https://jsonplaceholder.typicode.com/posts/${getRandomIntInRange(1,100)}`, jsonItem='body') }">
     <h2>Random Post from JSONPlaceholder</h2>
     <p>This code fetches a post from JSONPlaceholder and displays its body below. It was completely generated with GitHub Copilot, but then I asked it to revise or modify it a couple of  times.</p>
     <p x-text="postBody"></p>
+</div> {% endcomment %}
+
+<div x-data="{ postBody: $fetchjson(`https://jsonplaceholder.typicode.com/posts/${getRandomIntInRange(1,100)}`, jsonItem='body') }"
+     class="max-w-md mx-auto my-8 p-6 rounded-full bg-gradient-to-br from-orange-400 via-yellow-300 to-purple-500 shadow-xl">
+    <div class="bg-white bg-opacity-90 p-6 rounded-3xl border-4 border-yellow-400">
+        <h2 class="text-2xl font-bold text-center mb-4 text-purple-600 font-[cursive]">☮️ Random Groovy Post ☮️</h2>
+        <p class="text-orange-600 text-center mb-4 font-bold">This code fetches a post from JSONPlaceholder and displays its body below. It was completely generated with GitHub Copilot, but then I asked it to revise or modify it a couple of times.</p>
+        <div class="p-4 bg-black bg-opacity-10 rounded-3xl border-2 border-purple-400">
+            <p x-text="postBody" 
+               class="text-purple-800 italic text-lg leading-relaxed font-medium text-center hover:scale-105 transition-transform duration-300"></p>
+        </div>
+    </div>
 </div>
 
 <!-- This one I asked it to do something similar as above, but I used Claude instead of GPT -->
 
 <!-- CoPilot: Please create a div in Alpine that fetches json from this url (https://jsonplaceholder.typicode.com/posts/49) and places the 'body' as text inside a paragraph. -->
-<div x-data="{ postText: $fetchjson('https://jsonplaceholder.typicode.com/posts/49', jsonItem='body') }">
+{% comment %} <div x-data="{ postText: $fetchjson('https://jsonplaceholder.typicode.com/posts/49', jsonItem='body') }">
 <h2>Another Post from JSONPlaceholder</h2>
 <p>This fetches post #49 and displays its body text below:</p>
 <p x-text="postText"></p>
 <p>The difference between this one and the previous one was just that I switched it to Claude instead of GPT. It pretty much came out the same.</p>
+</div> {% endcomment %}
+
+<div x-data="{ postText: $fetchjson('https://jsonplaceholder.typicode.com/posts/49', jsonItem='body') }"
+     class="max-w-md mx-auto my-8 p-6 rounded-full bg-gradient-to-br from-orange-400 via-yellow-300 to-purple-500 shadow-xl">
+    <div class="bg-white bg-opacity-90 p-6 rounded-3xl border-4 border-yellow-400">
+        <h2 class="text-2xl font-bold text-center mb-4 text-purple-600 font-[cursive]">☮️ Another Groovy Post ☮️</h2>
+        <p class="text-orange-600 text-center mb-4 font-bold">This fetches post #49 and displays its body text below:</p>
+        <div class="p-4 bg-black bg-opacity-10 rounded-3xl border-2 border-purple-400">
+            <p x-text="postText" 
+               class="text-purple-800 italic text-lg leading-relaxed font-medium text-center hover:scale-105 transition-transform duration-300"></p>
+        </div>
+        <p class="text-orange-600 text-center mt-4 font-bold">The difference between this one and the previous one was just that I switched it to Claude instead of GPT. It pretty much came out the same.</p>
+    </div>
 </div>
 
 <!-- This one, including the javascript it uses from utility.js, was generated using CoPilot, and Claude rather than ChatGPT. -->
